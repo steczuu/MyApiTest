@@ -11,7 +11,7 @@ namespace MyAPI.Services
         }
 
         public DbSet<Customer> customers { get; set; }
-        public DbSet<Product> products { get; set; }
-        public DbSet<Transaction> transactions { get; set; }
+        public DbSet<Product> products { get; set; }    
+        public DbSet<Transaction> transactions { get; set; }    
     }
 }

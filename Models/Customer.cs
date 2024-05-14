@@ -1,7 +1,9 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.EntityFrameworkCore;
+using System.ComponentModel.DataAnnotations;
 
 namespace MyAPI.Models
 {
+    [PrimaryKey(nameof(customer_id))]   
     public class Customer
     {
         public int customer_id { get; set; }

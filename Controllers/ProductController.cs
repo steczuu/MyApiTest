@@ -7,52 +7,52 @@ namespace MyAPI.Controllers
 {
     [ApiController]
     [Route("API/[controller]")]
-    public class CustomerController : ControllerBase
+    public class ProductController : ControllerBase
     {
         private readonly ApplicationDbContext _context;
 
-        public CustomerController(ApplicationDbContext context)
+        public ProductController(ApplicationDbContext context)
         {
             _context = context;
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Customer>>> GetCustomers()
+        public async Task<ActionResult<IEnumerable<Product>>> GetProducts()
         {
-            return await _context.customers.ToListAsync();
+            return await _context.products.ToListAsync();
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<Customer>> GetCustomer(int id)
+        public async Task<ActionResult<Product>> GetProduct(int id)
         {
-            var customer = await _context.customers.FindAsync(id);
+            var product = await _context.products.FindAsync(id);
 
-            if (customer == null)
+            if (product == null)
             {
                 return NotFound();
             }
 
-            return customer;
+            return product;
         }
 
         [HttpPost]
-        public async Task<ActionResult<Customer>> AddCustomer(Customer customer)
+        public async Task<ActionResult<Product>> AddProduct(Product product)
         {
-            _context.customers.Add(customer);
+            _context.products.Add(product);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction(nameof(GetCustomer), new { id = customer.customer_id }, customer);
+            return CreatedAtAction(nameof(GetProduct), new { id = product.product_id }, product);
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutCustomer(int id, Customer customer)
+        public async Task<IActionResult> PutProduct(int id, Product product)
         {
-            if (id != customer.customer_id)
+            if (id != product.product_id)
             {
                 return BadRequest();
             }
 
-            _context.Entry(customer).State = EntityState.Modified;
+            _context.Entry(product).State = EntityState.Modified;
 
             try
             {
@@ -60,7 +60,7 @@ namespace MyAPI.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!CustomerExists(id))
+                if (!ProductExists(id))
                 {
                     return NotFound();
                 }
@@ -74,24 +74,24 @@ namespace MyAPI.Controllers
         }
 
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteCustomer(int id)
+        public async Task<IActionResult> DeleteProduct(int id)
         {
-            var customer = await _context.customers.FindAsync(id);
+            var product = await _context.products.FindAsync(id);
 
-            if (customer == null)
+            if (product == null)
             {
                 return NotFound();
             }
 
-            _context.customers.Remove(customer);
+            _context.products.Remove(product);
             await _context.SaveChangesAsync();
 
             return NoContent();
         }
 
-        private bool CustomerExists(int id)
+        private bool ProductExists(int id)
         {
-            return _context.customers.Any(e => e.customer_id == id);
+            return _context.products.Any(e => e.product_id == id);
         }
     }
 }

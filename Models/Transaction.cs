@@ -1,7 +1,9 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using Microsoft.EntityFrameworkCore;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace MyAPI.Models
 {
+    [PrimaryKey(nameof(transaction_id))]    
     public class Transaction
     {
         public int transaction_id { get; set; }

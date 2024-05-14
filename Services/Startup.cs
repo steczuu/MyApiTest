@@ -1,11 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System;
 
 namespace MyAPI.Services
 {
     public class Startup
     {
-        public IConfiguration Configuration { get; }
+        protected readonly IConfiguration Configuration;
 
         public Startup(IConfiguration configuration)
         {
